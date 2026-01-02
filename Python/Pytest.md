@@ -1,11 +1,4 @@
----
-id: a1d16jr15pjk85gsquucwou
-title: Pytest
-desc: ''
-updated: 1760872026905
-created: 1760871879990
----
-## Commands
+# Commands
 Execution
 ```bash
 pytest
@@ -20,7 +13,7 @@ Create coverage report
 pytest --cov
 ```
 
-## User input mocking
+# User input mocking
 ```python
 from pytest import MonkeyPatch
 Test_fun(monkeypatch : MonkeyPatch) :

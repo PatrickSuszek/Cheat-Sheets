@@ -1,11 +1,4 @@
----
-id: o8rs6j1vlnmnukguim1mefw
-title: Files
-desc: ''
-updated: 1760872301790
-created: 1760872200866
----
-## Read Segment
+# Read
 Read first X lines of the file
 ```bash
 head -n X <file> 

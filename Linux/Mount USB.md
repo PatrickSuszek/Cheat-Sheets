@@ -1,11 +1,3 @@
----
-id: u0844boas4dkuozr4z3q9vb
-title: Mount USB
-desc: ''
-updated: 1760871345156
-created: 1760871239237
----
-
 1. sudo blkid -o list -w /dev/null
    - Shows all connected devices
 2. sudo mount <usb path> /media/usbstick

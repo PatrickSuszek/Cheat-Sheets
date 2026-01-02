@@ -1,11 +1,4 @@
----
-id: q46ehjn9swzg7ssmwt7qmf7
-title: plantuml
-desc: ''
-updated: 1760872818364
-created: 1760872793604
----
-## Short Application Call
+# Short Application Call
 ```bash
 export PLANTUML_JAR="<path to the jar>"
 alias plantuml="java -Dfile.encoding=UTF-8 -jar $PLANTUML_JAR"
@@ -23,7 +16,7 @@ puml2svg() {
 }
 ```
 
-## Create empty Plantuml file with default design values
+# Create empty Plantuml file with default design values
 ```bash
 tpuml() {
     local prefix=""  # Default prefix is empty
@@ -72,5 +65,5 @@ tpuml() {
 }
 ```
 
-### Options
+## Options
 - -s <string> : Prepends the given string to every filename of the files to be created
