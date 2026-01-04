@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.22)
+project(GLFWTest LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# OpenGL system library
+find_package(glfw3 3.3 REQUIRED)
+find_package(OpenGL REQUIRED)
+
+# Collect all .cpp files
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+)
+
+
+add_executable(${PROJECT_NAME} ${SRC_FILES})
+
+# Header include directory
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    glfw
+    OpenGL::GL
+)
