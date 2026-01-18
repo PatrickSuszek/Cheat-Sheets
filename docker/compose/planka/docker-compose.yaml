@@ -1,0 +1,44 @@
+name: planka_template
+
+services:
+  postgres:
+    postgres:
+    image: postgres:18
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql:/var/lib/postgresql
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+
+  planka:
+    image: ghcr.io/plankanban/planka:2.0.0-rc.4
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_PLANKA_USER}:${POSTGRES_PLANKA_PW}@postgres:5432/${POSTGRES_PLANKA_DB}
+      - BASE_URL=http://${MY_HOST}:${PLANKA_PORT}
+      - SECRET_KEY=notsecretkey
+      - SOCKET_ALLOWED_ORIGINS=http://${MY_HOST}:${PLANKA_PORT}
+      - DEFAULT_ADMIN_EMAIL=${PLANKA_ADMIN_MAIL}
+      - DEFAULT_ADMIN_PASSWORD=${PLANKA_ADMIN_PW}
+      - DEFAULT_ADMIN_NAME=${PLANKA_ADMIN_NAME}
+      - DEFAULT_ADMIN_USERNAME=${PLANKA_ADMIN_USER}
+    volumes:
+      - ./planka/favicons:/app/public/favicons
+      - ./planka/user-avatars:/app/public/user-avatars
+      - ./planka/background-images:/app/public/background-images
+      - ./planka/attachments:/app/private/attachments
+    ports:
+      - '${PLANKA_PORT}:1337'
+    networks:
+      - planka
+
+networks:
+  planka:
+    external: false
