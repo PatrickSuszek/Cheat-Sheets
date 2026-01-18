@@ -86,6 +86,31 @@ More information at: [forgejo.org](https://forgejo.org/docs/latest/admin/actions
 ##### ./forgejo-runner
 Persistant storage of the runner definition and provider of the user configuration file.
 
+#### Setup Instructions
+Before changing the command, these steps must be executed:
+
+```bash
+Open the containers shell:
+docker exec -it forgejo-runner /bin/sh
+
+Run the registration command:
+forgejo-runner register
+
+Enter the Forgejo instances url:
+http://hostname:3000
+
+Enter the runner token found under
+    Site administration -> Actions -> Runners -> Create new runner
+
+Enter the runner name or press enter
+
+Enter lables or press enter
+
+Check output for success
+```
+
+More information at [forgejo.org](https://forgejo.org/docs/latest/admin/actions/runner-installation/#standard-registration)
+
 ### Caddy
 Caddy is a reverse proxy used by this setup to host created mkdocs project documentations.
 
