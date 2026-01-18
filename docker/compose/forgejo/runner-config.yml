@@ -1,0 +1,25 @@
+runner:
+  file: .runner
+  capacity: 1
+  envs:
+    SITES_DIR: /sites
+  env_file: .env
+  timeout: 3h
+  shutdown_timeout: 3h
+  insecure: false
+  fetch_timeout: 5s
+  fetch_interval: 2s
+  report_interval: 1s
+  labels: []
+
+container:
+  network: ""
+  enable_ipv6: false
+  privileged: false
+  options: "--volume /sites:/sites"
+  workdir_parent:
+  valid_volumes:
+    - /sites
+  docker_host: "tcp://docker-in-docker:2375"
+  force_pull: false
+  force_rebuild: false

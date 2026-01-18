@@ -1,0 +1,35 @@
+name: Build and deploy MkDocs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build MkDocs
+        uses: docker://squidfunk/mkdocs-material
+        with:
+          args: build --clean
+
+      - name: Deploy MkDocs to sites folder
+        run: |
+          if [ -z "$SITES_DIR" ]; then
+            echo "Error: SITES_DIR not set"
+            exit 1
+          fi
+
+          TARGET_DIR="$SITES_DIR/${GITHUB_REPOSITORY}"
+
+          if [ -d "$TARGET_DIR" ]; then
+            rm -rf "$TARGET_DIR"
+          fi
+
+          mkdir -p "$TARGET_DIR"
+
+          cp -r ./public/* "$TARGET_DIR/"

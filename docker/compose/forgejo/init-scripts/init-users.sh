@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
+	CREATE DATABASE ${FORGEJO__database__NAME};
+	CREATE USER ${FORGEJO__database__USER} WITH PASSWORD '${FORGEJO__database__PASSWD}';
+	ALTER DATABASE ${FORGEJO__database__NAME} OWNER TO ${FORGEJO__database__USER};
+	GRANT ALL PRIVILEGES ON DATABASE ${FORGEJO__database__NAME} TO ${FORGEJO__database__USER};
+EOSQL
