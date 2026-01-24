@@ -1,4 +1,4 @@
-name: forgejo_tempalte
+name: forgejo_template
 
 services:
   postgres:
@@ -11,6 +11,8 @@ services:
     volumes:
       - ./postgresql:/var/lib/postgresql
       - ./init-scripts:/docker-entrypoint-initdb.d:ro
+    networks:
+      - forgejo
 
   forgejo:
     image: codeberg.org/forgejo/forgejo:13

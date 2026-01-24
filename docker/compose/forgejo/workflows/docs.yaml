@@ -32,4 +32,4 @@ jobs:
 
           mkdir -p "$TARGET_DIR"
 
-          cp -r ./public/* "$TARGET_DIR/"
+          cp -r ./site/* "$TARGET_DIR/"
