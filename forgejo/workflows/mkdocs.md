@@ -1,3 +1,8 @@
+# mkdocs
+With this workflow the mkdocs documentation of the project will be build and uploaded to the site folder defined by the runners' configuration environment variables.
+
+## Workflow
+```yml
 name: Build and deploy MkDocs
 
 on:
@@ -33,3 +38,12 @@ jobs:
           mkdir -p "$TARGET_DIR"
 
           cp -r ./site/* "$TARGET_DIR/"
+```
+
+## Runner Configuration
+```yml
+runner:
+  # volume directory
+  envs:
+    SITES_DIR: /sites
+```

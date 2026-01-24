@@ -1,4 +1,0 @@
-:3001 {
-    root * /srv/sites
-    file_server
-}
