@@ -3,10 +3,10 @@
 set -e
 
 mkdir -p forgejo-runner/.cache
-mkdir docs-sites
+mkdir -p docs-sites
 
-chown -R 1001:1001 forgejo-runner
-chmod 775 forgejo-runner/.cache
-chmod g+s forgejo-runner/.cache
+sudo chown -R 1001:1001 forgejo-runner
+sudo chmod 775 forgejo-runner/.cache
+sudo chmod g+s forgejo-runner/.cache
 
-sudo cp runner-config.yml /forgejo-runner/config.yml
+sudo cp runner-config.yml ./forgejo-runner/config.yml
