@@ -43,3 +43,12 @@ Firefox doesn't use the systems trusted certificates, so it needs to be added ma
 ```
 Settings -> Privacy & Security ->  Security -> View Certificates -> Authorities (default tab) -> Import
 ```
+
+## Windows 11
+Open the execute interface with WIN + R and enter:
+```
+certmgr.msc
+```
+
+Extend the menu for Trusted Root Certification Authorities and right-click on the certificate folder.
+Under All Actions select import and follow the opened context menu to import the certificate.
