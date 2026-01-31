@@ -242,7 +242,34 @@ Please see the [mkdocs workflow](../../../forgejo/workflows/mkdocs.md).
 ## Enabling Local Reverse Proxy / SSL
 To enable the Forgejo runner to be able to work with a self-signed ca-certificate it needs to be added to the [docker-in-docker](docker-in-docker.md) and runner services.
 
-This can be achieved with the following volumes.
+To add it to the runner the following Dockerfile needs to be used.
+```yaml
+FROM data.forgejo.org/forgejo/runner:12
+
+USER root
+
+# Install CA tooling
+RUN apk update && \
+    apk add --no-cache ca-certificates
+
+# Add your Caddy / lab root CA
+COPY lab_root.crt /usr/local/share/ca-certificates/lab_root.crt
+
+# Register it system-wide
+RUN update-ca-certificates
+
+USER 1001
+```
+
+Exchange the image attribute from the docker compose service definition for these lines.
+```yaml
+build:
+  context: .
+  dockerfile: Dockerfile.runner
+```
+Here the Dockerfile is in the same directory as the compose file and is named Dockerfile.runner.
+
+For the docker in docker service, the following volumes need to be added.
 ```yaml
 - ./lab_root.crt:/usr/local/share/ca-certificates/lab_root.crt:ro
 - ./lab_root.crt:/etc/ssl/certs/lab_root.crt
@@ -278,4 +305,18 @@ The same needs to be done in the runner configuration.
 ```yaml
 container:
     options: "--add-host forgejo.pidragon:192.168.2.10"
+```
+
+### Local DNS
+If a local dns service is in use it can be, that docker won't find the apk servers to get the certificate tools.
+To tell docker which dns to use create the following file.
+```bash
+sudo nano /etc/docker/daemon.json
+```
+
+And add this configuration for the google and cloudeflare dns servers.
+```json
+{
+  "dns": ["8.8.8.8", "1.1.1.1"]
+}
 ```

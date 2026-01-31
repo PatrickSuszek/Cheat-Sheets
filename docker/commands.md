@@ -1,5 +1,6 @@
 # Docker Commands
 
+## Containers
 ```bash
 docker ps
 ```
@@ -27,8 +28,19 @@ docker exec -it <container> /bin/sh
 ```
 Mount the shell of the defined container in interactive mode.
 
+## Network
 ```bash
 docker network create <name>
 ```
 Create a docker network with the given name.
 Useful for external networks, that should bridge different compose files.
+
+```bash
+docker network ls
+```
+List all existing networks created by docker compose or docker commands.
+
+```bash
+docker network prune
+```
+Delete all unused docker networks.
